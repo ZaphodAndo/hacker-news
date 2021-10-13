@@ -1,0 +1,29 @@
+.article-view {
+  background-color: var(--secondary-background);
+  width: 100%;
+  padding: 40px;
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  h1 {
+    color: var(--primary-text);
+    font-family: Segoe UI Variable Static Display;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 36px;
+    margin: 0 10px 0px 0;
+  }
+
+  p {
+    color: var(--secondary-text);
+    font-family: Segoe UI Variable Static Display;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: unset;
+  }
+}
