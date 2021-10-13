@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import Story from "../../models/Story";
+import Post from "../../models/Post";
 import Link from "../Link/Link";
 import "./SideBar.scss";
 
 type SideBarProps = {
-  stories: Array<Story>;
-  onClick: (story: Story) => void;
+  posts: Array<Post>;
+  onClick: (post: Post) => void;
 };
 
 class SideBar extends Component<SideBarProps> {
   public render() {
     return (
       <div className="side-bar">
-        {this.props.stories.map((story) => {
+        {this.props.posts.map((post) => {
           return (
-            <Link key={story.id} story={story} onClick={this.props.onClick} />
+            <Link key={post.id} post={post} onClick={this.props.onClick} />
           );
         })}
       </div>

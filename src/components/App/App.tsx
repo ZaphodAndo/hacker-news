@@ -3,27 +3,27 @@ import ArticleView from "../ArticleView/ArticleView";
 import SideBar from "../Sidebar/SideBar";
 import NavBar from "../NavBar/NavBar";
 import RequestService from "../../RequestService";
-import Story from "../../models/Story";
+import Post from "../../models/Post";
 import "./App.scss";
 
 type AppState = {
-  topStories: Array<Story>;
-  currentStory: Story | null;
+  topPosts: Array<Post>;
+  currentPost: Post | null;
 };
 
 class App extends Component {
   public state: AppState = {
-    topStories: [],
-    currentStory: null,
+    topPosts: [],
+    currentPost: null,
   };
 
   public async componentDidMount() {
     const result = await RequestService.getTopStories();
-    this.setState({ topStories: result });
+    this.setState({ topPosts: result });
   }
 
-  public selectStory = (story: Story) => {
-    this.setState({ currentStory: story });
+  public selectStory = (story: Post) => {
+    this.setState({ currentPost: story });
   };
 
   public render() {
@@ -31,8 +31,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <div className="content">
-          <SideBar stories={this.state.topStories} onClick={this.selectStory} />
-          <ArticleView story={this.state.currentStory} />
+          <SideBar posts={this.state.topPosts} onClick={this.selectStory} />
+          <ArticleView post={this.state.currentPost} />
         </div>
       </div>
     );

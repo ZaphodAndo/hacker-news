@@ -1,36 +1,30 @@
 import React, { Component } from "react";
-import moment from "moment";
-import Story from "../../models/Story";
+import Post from "../../models/Post";
 import RequestService from "../../RequestService";
 import "./ArticleView.scss";
 
 type ArticleViewProps = {
-  story: Story | null;
+  post: Post | null;
 };
 
 class ArticleView extends Component<ArticleViewProps> {
-  public componentDidUpdate() {
-    if (this.props.story?.kids !== undefined) {
-      RequestService.getComments(this.props.story.kids);
+  public async componentDidUpdate() {
+    if (this.props.post && this.props.post.comments_count >= 1) {
+      const comments = await RequestService.getComments(this.props.post.id);
     }
   }
 
   public render() {
-    if (this.props.story !== null) {
-      const time = moment(this.props.story.time * 1000).fromNow();
-
-      const url = new URL(this.props.story.url);
-      const domain = url.hostname.replace("www.", "");
-
+    if (this.props.post !== null) {
       return (
         <div className="article-view">
           <div className="title">
-            <h1>{this.props.story.title}</h1>
-            <p>({domain})</p>
+            <h1>{this.props.post.title}</h1>
+            <p>({this.props.post.domain})</p>
           </div>
           <p>
-            Posted by {this.props.story.by} {time} |{" "}
-            {this.props.story.descendants} comments | {this.props.story.score}{" "}
+            Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
+            {this.props.post.comments_count} comments | {this.props.post.points}{" "}
             points
           </p>
         </div>

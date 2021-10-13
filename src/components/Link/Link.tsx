@@ -1,11 +1,10 @@
 import { Component } from "react";
-import moment from "moment";
-import Story from "../../models/Story";
+import Post from "../../models/Post";
 import "./Link.scss";
 
 type LinkProps = {
-  story: Story;
-  onClick: (story: Story) => void;
+  post: Post;
+  onClick: (story: Post) => void;
 };
 
 class Link extends Component<LinkProps> {
@@ -20,20 +19,19 @@ class Link extends Component<LinkProps> {
       element[0].classList.remove("active");
     }
     this.setState({ active: isActive });
-    this.props.onClick(this.props.story);
+    this.props.onClick(this.props.post);
   };
 
   public render() {
-    const time = moment(this.props.story.time * 1000).fromNow();
     return (
       <div
         className={this.state.active ? "link active" : "link"}
         onClick={this.viewPost}
       >
-        <h1>{this.props.story.title}</h1>
+        <h1>{this.props.post.title}</h1>
         <p>
-          Posted by {this.props.story.by} {time} |{" "}
-          {this.props.story.descendants} comments | {this.props.story.score}{" "}
+          Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
+          {this.props.post.comments_count} comments | {this.props.post.points}{" "}
           points
         </p>
       </div>
