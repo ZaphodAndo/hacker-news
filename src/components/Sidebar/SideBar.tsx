@@ -12,11 +12,13 @@ class SideBar extends Component<SideBarProps> {
   public render() {
     return (
       <div className="side-bar">
-        {this.props.posts.map((post) => {
-          return (
-            <Link key={post.id} post={post} onClick={this.props.onClick} />
-          );
-        })}
+        <div className="side-bar-links">
+          {this.props.posts.map((post) => {
+            return (
+              <Link key={post.id} post={post} onClick={this.props.onClick} />
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -1,7 +1,14 @@
 .side-bar {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--primary-background);
   border-right: 1px solid var(--teriary-background);
   width: 100%;
   max-width: 420px;
   padding: 24px 0;
+
+  .side-bar-links {
+    margin-bottom: 100px;
+  }
 }
