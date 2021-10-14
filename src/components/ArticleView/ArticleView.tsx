@@ -16,7 +16,14 @@ class ArticleView extends Component<ArticleViewProps> {
         <div className="article-view">
           <div className="title">
             <h1>{this.props.post.title}</h1>
-            <p>({this.props.post.domain})</p>
+            <a
+              className="post-link"
+              href={this.props.post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ({this.props.post.domain})
+            </a>
           </div>
           <p>
             Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
