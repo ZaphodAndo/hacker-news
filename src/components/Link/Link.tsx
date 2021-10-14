@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Post from "../../models/Post";
 import "./Link.scss";
 
@@ -8,26 +8,32 @@ type LinkProps = {
 };
 
 class Link extends Component<LinkProps> {
-  public state = {
-    active: false,
-  };
+  private _linkRef: React.RefObject<HTMLDivElement>;
+
+  constructor(props: LinkProps) {
+    super(props);
+    this._linkRef = React.createRef();
+  }
 
   public viewPost = () => {
-    const isActive = this.state.active ? false : true;
-    const element = document.getElementsByClassName("active");
-    if (element[0] !== undefined) {
-      element[0].classList.remove("active");
+    if (this._linkRef.current?.className !== "link active") {
+      const element = document.getElementsByClassName("active");
+
+      if (element[0] !== undefined) {
+        element[0].classList.remove("active");
+      }
+
+      if (this._linkRef.current?.className) {
+        this._linkRef.current.className = "link active";
+      }
     }
-    this.setState({ active: isActive });
+
     this.props.onClick(this.props.post);
   };
 
   public render() {
     return (
-      <div
-        className={this.state.active ? "link active" : "link"}
-        onClick={this.viewPost}
-      >
+      <div className="link" onClick={this.viewPost} ref={this._linkRef}>
         <h1>{this.props.post.title}</h1>
         <p>
           Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
