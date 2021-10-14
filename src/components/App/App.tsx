@@ -4,17 +4,20 @@ import SideBar from "../Sidebar/SideBar";
 import NavBar from "../NavBar/NavBar";
 import RequestService from "../../RequestService";
 import Post from "../../models/Post";
+import Comment from "../../models/Comment";
 import "./App.scss";
 
 type AppState = {
   topPosts: Array<Post>;
   currentPost: Post | null;
+  comments: Array<Comment>;
 };
 
 class App extends Component {
   public state: AppState = {
     topPosts: [],
     currentPost: null,
+    comments: [],
   };
 
   public async componentDidMount() {
@@ -22,8 +25,14 @@ class App extends Component {
     this.setState({ topPosts: result });
   }
 
-  public selectStory = (story: Post) => {
-    this.setState({ currentPost: story });
+  public selectStory = async (post: Post) => {
+    this.setState({ currentPost: post });
+    if (post.comments_count >= 1) {
+      const comments = await RequestService.getComments(post.id);
+      this.setState({ comments: comments });
+    } else {
+      this.setState({ comments: [] });
+    }
   };
 
   public render() {
@@ -32,7 +41,10 @@ class App extends Component {
         <NavBar />
         <div className="content">
           <SideBar posts={this.state.topPosts} onClick={this.selectStory} />
-          <ArticleView post={this.state.currentPost} />
+          <ArticleView
+            post={this.state.currentPost}
+            comments={this.state.comments}
+          />
         </div>
       </div>
     );

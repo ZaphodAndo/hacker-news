@@ -2,29 +2,14 @@ import React, { Component } from "react";
 import ArticleComment from "../Comment/ArticleComment";
 import Post from "../../models/Post";
 import Comment from "../../models/Comment";
-import RequestService from "../../RequestService";
 import "./ArticleView.scss";
 
 type ArticleViewProps = {
   post: Post | null;
-};
-
-type ArticleViewState = {
   comments: Array<Comment>;
 };
 
 class ArticleView extends Component<ArticleViewProps> {
-  public state: ArticleViewState = {
-    comments: [],
-  };
-
-  public async componentDidUpdate() {
-    if (this.props.post && this.props.post.comments_count >= 1) {
-      const comments = await RequestService.getComments(this.props.post.id);
-      this.setState({ comments: comments });
-    }
-  }
-
   public render() {
     if (this.props.post !== null) {
       return (
@@ -39,7 +24,7 @@ class ArticleView extends Component<ArticleViewProps> {
             points
           </p>
           <div className="comment-section">
-            {this.state.comments.map((comment) => {
+            {this.props.comments.map((comment) => {
               return (
                 <ArticleComment
                   key={comment.id}
