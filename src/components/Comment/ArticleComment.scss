@@ -1,12 +1,12 @@
 .comment {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   .comment-data {
     padding-left: 10px;
     border-left: solid 2px hsla(45, 86%, 62%, 1);
 
     .comment-meta {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 16px;
       margin-bottom: 4px;
@@ -16,7 +16,7 @@
       p {
         margin-top: 4px;
         color: var(--primary-text);
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 20px;
       }

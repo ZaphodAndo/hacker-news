@@ -2,11 +2,10 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: var(--primary-background);
   border-right: 1px solid var(--teriary-background);
   width: 100%;
   max-width: 420px;
-  padding: 24px 0;
+  padding: 18px 0;
 
   .side-bar-links {
     margin-bottom: 100px;
@@ -24,13 +23,13 @@
 }
 
 .side-bar::-webkit-scrollbar-track {
-  background: var(--primary-background);
+  background: var(--secondary-background);
 }
 
 .side-bar::-webkit-scrollbar-thumb {
   background-color: var(--thumb-background);
   border-radius: 7px;
-  border: 3px solid var(--primary-background);
+  border: 3px solid var(--secondary-background);
 }
 
 .side-bar::-webkit-scrollbar-thumb:hover {

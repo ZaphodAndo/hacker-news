@@ -36,9 +36,7 @@ class Link extends Component<LinkProps> {
       <div className="link" onClick={this.viewPost} ref={this._linkRef}>
         <h1>{this.props.post.title}</h1>
         <p>
-          Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
-          {this.props.post.comments_count} comments | {this.props.post.points}{" "}
-          points
+          Posted by {this.props.post.user} {this.props.post.time_ago}
         </p>
       </div>
     );

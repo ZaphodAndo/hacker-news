@@ -2,41 +2,44 @@
   background-color: var(--secondary-background);
   height: 100vh;
   width: 100%;
-  padding: 40px;
   overflow-y: auto;
   overflow-x: hidden;
 
-  .title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
+  .article-info {
+    max-width: 704px;
+    margin: 40px auto 40px auto;
+
+    h1 {
+      color: var(--primary-text);
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 36px;
+      margin: 0 0 10px 0;
+    }
+
+    p,
+    .post-link {
+      color: var(--secondary-text);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 28px;
+      margin: unset;
+      text-decoration: unset;
+    }
+
+    .post-link:hover {
+      color: var(--accent);
+    }
   }
 
-  h1 {
-    color: var(--primary-text);
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 36px;
-    margin: 0 10px 0px 0;
-  }
-
-  p,
-  .post-link {
-    color: var(--secondary-text);
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 28px;
-    margin: unset;
-    text-decoration: unset;
-  }
-
-  .post-link:hover {
-    color: var(--accent);
+  hr {
+    margin: 0;
+    border: 1px solid var(--teriary-background);
   }
 
   .comment-section {
-    margin-top: 40px;
-    margin-bottom: 150px;
+    max-width: 704px;
+    margin: 40px auto 150px auto;
   }
 }
 

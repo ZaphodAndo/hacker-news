@@ -14,22 +14,22 @@ class ArticleView extends Component<ArticleViewProps> {
     if (this.props.post !== null) {
       return (
         <div className="article-view">
-          <div className="title">
+          <div className="article-info">
             <h1>{this.props.post.title}</h1>
-            <a
-              className="post-link"
-              href={this.props.post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ({this.props.post.domain})
-            </a>
+            <p>
+              {this.props.post.comments_count} comments,{" "}
+              {this.props.post.points} points,{" "}
+              <a
+                className="post-link"
+                href={this.props.post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ({this.props.post.domain})
+              </a>
+            </p>
           </div>
-          <p>
-            Posted by {this.props.post.user} {this.props.post.time_ago} |{" "}
-            {this.props.post.comments_count} comments | {this.props.post.points}{" "}
-            points
-          </p>
+          <hr />
           <div className="comment-section">
             {this.props.comments.map((comment) => {
               return (

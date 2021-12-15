@@ -1,5 +1,5 @@
 .link {
-  margin: 0px 24px -10px 24px;
+  margin: 0px 18px 10px 18px;
   padding: 16px;
   border-radius: 7px;
   cursor: pointer;
@@ -9,16 +9,14 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
-    letter-spacing: 0em;
     margin: 0 0 4px 0;
   }
 
   p {
     color: var(--secondary-text);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
     letter-spacing: 0em;
-    text-align: left;
     margin: unset;
   }
 
