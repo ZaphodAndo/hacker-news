@@ -2,6 +2,7 @@ import { Component } from "react";
 import ArticleComment from "../Comment/ArticleComment";
 import Post from "../../models/Post";
 import Comment from "../../models/Comment";
+import NoArticleView from "../NoArticleView/NoArticleView";
 import "./ArticleView.scss";
 
 type ArticleViewProps = {
@@ -43,7 +44,7 @@ class ArticleView extends Component<ArticleViewProps> {
         </div>
       );
     } else {
-      return <div>No Story selected (*/ω＼*)</div>;
+      return <NoArticleView />;
     }
   }
 }
