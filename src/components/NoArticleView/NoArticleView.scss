@@ -1,4 +1,7 @@
 .no-article-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 10rem auto auto auto;
 
   span {
@@ -7,5 +10,6 @@
 
   p {
     margin: 0;
+    color: var(--primary-text);
   }
 }
