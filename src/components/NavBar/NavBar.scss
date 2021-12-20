@@ -1,5 +1,7 @@
 .nav-bar {
   display: flex;
+  align-items: center;
+  padding-right: 18px;
   border-bottom: 1px solid var(--teriary-background);
 
   p {

@@ -2,7 +2,7 @@ import { Component } from "react";
 import ArticleView from "../ArticleView/ArticleView";
 import SideBar from "../Sidebar/SideBar";
 import NavBar from "../NavBar/NavBar";
-import RequestService from "../../RequestService";
+import RequestService from "../../services/RequestService";
 import Post from "../../models/Post";
 import Comment from "../../models/Comment";
 import "./App.scss";
@@ -21,9 +21,21 @@ class App extends Component {
   };
 
   public async componentDidMount() {
+    this.checkTheme();
     const result = await RequestService.getTopStories();
     this.setState({ topPosts: result });
   }
+
+  public checkTheme = () => {
+    let theme = localStorage.getItem("theme");
+    if (!theme) {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      localStorage.setItem("theme", theme);
+    }
+    document.documentElement.setAttribute("data-theme", theme);
+  };
 
   public selectStory = async (post: Post) => {
     this.setState({ currentPost: post });

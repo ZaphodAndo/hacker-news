@@ -6,6 +6,7 @@
     border-left: solid 2px hsla(45, 86%, 62%, 1);
 
     .comment-meta {
+      color: var(--article-header-text);
       font-size: 14px;
       font-weight: 400;
       line-height: 16px;
@@ -13,12 +14,23 @@
     }
 
     .comment-content {
+      color: var(--article-text);
+
       p {
         margin-top: 4px;
-        color: var(--primary-text);
+        color: var(--article-text);
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--accent);
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
