@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import ArticleView from "../ArticleView/ArticleView";
 import SideBar from "../Sidebar/SideBar";
 import NavBar from "../NavBar/NavBar";

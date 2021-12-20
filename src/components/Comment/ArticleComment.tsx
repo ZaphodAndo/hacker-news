@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import Comment from "../../models/Comment";
 import "./ArticleComment.scss";
 

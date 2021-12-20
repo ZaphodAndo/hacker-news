@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import ArticleComment from "../Comment/ArticleComment";
 import Post from "../../models/Post";
 import Comment from "../../models/Comment";
