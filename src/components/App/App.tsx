@@ -32,7 +32,6 @@ export function App() {
         return () => {
             ignore = true;
         };
-
     }, [currentPost]);
 
     const selectStory = (post: Post) => {

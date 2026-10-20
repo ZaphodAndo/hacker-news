@@ -1,4 +1,5 @@
 import { sanitiseHtml } from "../../utils/sanitiseHtml";
+import { Timestamp } from "../Timestamp/Timestamp";
 import type { Comment } from "../../models/Comment";
 import "./ArticleComment.css";
 
@@ -14,7 +15,7 @@ export function ArticleComment({ comment, className }: ArticleCommentProps) {
         <div className={className ? className + " comment" : "comment"}>
             <div className={borderStyle}>
                 <p className="comment-meta">
-                    {comment.user} {comment.time_ago}
+                    {comment.user} <Timestamp time={comment.time} />
                 </p>
                 <div
                     className="comment-content"

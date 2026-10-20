@@ -1,3 +1,4 @@
+import { Timestamp } from "../Timestamp/Timestamp";
 import type { Post } from "../../models/Post";
 import "./Link.css";
 
@@ -20,7 +21,7 @@ export function Link({ post, isActive, onClick }: LinkProps) {
                 </button>
             </h2>
             <p>
-                Posted by {post.user} {post.time_ago}
+                Posted by {post.user} <Timestamp time={post.time} />
             </p>
         </li>
     );

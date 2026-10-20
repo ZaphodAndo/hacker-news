@@ -4,7 +4,6 @@ export type Post = {
     id: number;
     points: number;
     time: number;
-    time_ago: number;
     title: string;
     type: string;
     url: string;
