@@ -13,3 +13,9 @@
         margin: unset;
     }
 }
+
+@media (max-width: 48rem) {
+    .nav-bar h1 {
+        padding-left: 1.125rem;
+    }
+}

@@ -1,5 +1,4 @@
 .side-bar {
-    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
     border-right: 0.0625rem solid var(--teriary-background);

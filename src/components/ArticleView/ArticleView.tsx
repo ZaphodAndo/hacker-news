@@ -7,9 +7,10 @@ import "./ArticleView.css";
 type ArticleViewProps = {
     post: Post | null;
     comments: Array<Comment>;
+    onBack: () => void;
 };
 
-export function ArticleView({ post, comments }: ArticleViewProps) {
+export function ArticleView({ post, comments, onBack }: ArticleViewProps) {
     if (post === null) {
         return <NoArticleView />;
     }
@@ -17,7 +18,12 @@ export function ArticleView({ post, comments }: ArticleViewProps) {
     return (
         <main className="article-view">
             <div className="article-info">
-                <h2>{post.title}</h2>
+                <button type="button" className="back-button" onClick={onBack}>
+                    <span aria-hidden="true">←</span> Back to stories
+                </button>
+                <h2 id="article-title" tabIndex={-1}>
+                    {post.title}
+                </h2>
                 <p>
                     {post.comments_count} comments, {post.points} points,{" "}
                     <a

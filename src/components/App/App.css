@@ -1,5 +1,29 @@
 .App {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+
+    /* Fills the space below the nav bar; the columns scroll inside it */
     .content {
         display: flex;
+        flex: 1;
+        min-height: 0;
+    }
+}
+
+@media (max-width: 48rem) {
+    .App .content {
+        .side-bar {
+            max-width: none;
+            border-right: none;
+        }
+
+        .no-article-view {
+            display: none;
+        }
+
+        &.article-open .side-bar {
+            display: none;
+        }
     }
 }

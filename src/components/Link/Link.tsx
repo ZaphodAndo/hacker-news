@@ -14,6 +14,7 @@ export function Link({ post, isActive, onClick }: LinkProps) {
             <h2>
                 <button
                     type="button"
+                    id={`story-${post.id}`}
                     aria-current={isActive ? "true" : undefined}
                     onClick={() => onClick(post)}
                 >
