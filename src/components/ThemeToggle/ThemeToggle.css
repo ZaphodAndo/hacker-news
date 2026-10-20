@@ -1,0 +1,6 @@
+.icon {
+    margin: 0 0 0 auto;
+    height: 2rem;
+    color: var(--secondary-text);
+    cursor: pointer;
+}

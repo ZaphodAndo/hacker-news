@@ -1,0 +1,15 @@
+.nav-bar {
+    display: flex;
+    align-items: center;
+    padding-right: 1.125rem;
+    border-bottom: 0.0625rem solid var(--teriary-background);
+
+    p {
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 1.25rem;
+        color: var(--primary-text);
+        padding: 1.125rem 0 1.125rem 7.9375rem;
+        margin: unset;
+    }
+}

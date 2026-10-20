@@ -1,12 +1,10 @@
-import "./NoArticleView.scss";
+import "./NoArticleView.css";
 
-function NoArticleView() {
-  return (
-    <div className="no-article-view">
-      <span role="img">📝</span>
-      <p>No article selected.</p>
-    </div>
-  );
+export function NoArticleView() {
+    return (
+        <div className="no-article-view">
+            <span role="img">📝</span>
+            <p>No article selected.</p>
+        </div>
+    );
 }
-
-export default NoArticleView;

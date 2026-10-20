@@ -1,66 +1,67 @@
 import { Component } from "react";
-import ArticleView from "../ArticleView/ArticleView";
-import SideBar from "../Sidebar/SideBar";
-import NavBar from "../NavBar/NavBar";
-import RequestService from "../../services/RequestService";
-import type Post from "../../models/Post";
-import type Comment from "../../models/Comment";
-import "./App.scss";
+import { ArticleView } from "../ArticleView/ArticleView";
+import { SideBar } from "../Sidebar/SideBar";
+import { NavBar } from "../NavBar/NavBar";
+import { getComments, getTopStories } from "../../services/RequestService";
+import type { Post } from "../../models/Post";
+import type { Comment } from "../../models/Comment";
+import "./App.css";
 
 type AppState = {
-  topPosts: Array<Post>;
-  currentPost: Post | null;
-  comments: Array<Comment>;
+    topPosts: Array<Post>;
+    currentPost: Post | null;
+    comments: Array<Comment>;
 };
 
-class App extends Component {
-  public state: AppState = {
-    topPosts: [],
-    currentPost: null,
-    comments: [],
-  };
+export class App extends Component {
+    public state: AppState = {
+        topPosts: [],
+        currentPost: null,
+        comments: [],
+    };
 
-  public async componentDidMount() {
-    this.checkTheme();
-    const result = await RequestService.getTopStories();
-    this.setState({ topPosts: result });
-  }
-
-  public checkTheme = () => {
-    let theme = localStorage.getItem("theme");
-    if (!theme) {
-      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-      localStorage.setItem("theme", theme);
+    public async componentDidMount() {
+        this.checkTheme();
+        const result = await getTopStories();
+        this.setState({ topPosts: result });
     }
-    document.documentElement.setAttribute("data-theme", theme);
-  };
 
-  public selectStory = async (post: Post) => {
-    this.setState({ currentPost: post });
-    if (post.comments_count >= 1) {
-      const comments = await RequestService.getComments(post.id);
-      this.setState({ comments: comments });
-    } else {
-      this.setState({ comments: [] });
+    public checkTheme = () => {
+        let theme = localStorage.getItem("theme");
+        if (!theme) {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+            localStorage.setItem("theme", theme);
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+    };
+
+    public selectStory = async (post: Post) => {
+        this.setState({ currentPost: post });
+        if (post.comments_count >= 1) {
+            const comments = await getComments(post.id);
+            this.setState({ comments: comments });
+        } else {
+            this.setState({ comments: [] });
+        }
+    };
+
+    public render() {
+        return (
+            <div className="App">
+                <NavBar />
+                <div className="content">
+                    <SideBar
+                        posts={this.state.topPosts}
+                        onClick={this.selectStory}
+                    />
+                    <ArticleView
+                        post={this.state.currentPost}
+                        comments={this.state.comments}
+                    />
+                </div>
+            </div>
+        );
     }
-  };
-
-  public render() {
-    return (
-      <div className="App">
-        <NavBar />
-        <div className="content">
-          <SideBar posts={this.state.topPosts} onClick={this.selectStory} />
-          <ArticleView
-            post={this.state.currentPost}
-            comments={this.state.comments}
-          />
-        </div>
-      </div>
-    );
-  }
 }
-
-export default App;

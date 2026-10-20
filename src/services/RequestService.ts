@@ -1,26 +1,22 @@
-class RequestService {
-  private _endpoint = "https://api.hackerwebapp.com/";
+const endpoint = "https://api.hackerwebapp.com/";
 
-  private async _getItem(id: number) {
-    return await fetch(`${this._endpoint}item/${id}`)
-      .then((response) => response.json())
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  public async getTopStories() {
-    return await fetch(`${this._endpoint}news`)
-      .then((response) => response.json())
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  public async getComments(id: number) {
-    const post = await this._getItem(id);
-    return post.comments;
-  }
+async function getItem(id: number) {
+    return await fetch(`${endpoint}item/${id}`)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
-export default new RequestService();
+export async function getTopStories() {
+    return await fetch(`${endpoint}news`)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+export async function getComments(id: number) {
+    const post = await getItem(id);
+    return post.comments;
+}
