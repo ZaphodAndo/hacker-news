@@ -3,8 +3,8 @@ import ArticleView from "../ArticleView/ArticleView";
 import SideBar from "../Sidebar/SideBar";
 import NavBar from "../NavBar/NavBar";
 import RequestService from "../../services/RequestService";
-import Post from "../../models/Post";
-import Comment from "../../models/Comment";
+import type Post from "../../models/Post";
+import type Comment from "../../models/Comment";
 import "./App.scss";
 
 type AppState = {

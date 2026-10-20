@@ -1,4 +1,4 @@
-type Comment = {
+export default interface Comment {
   comments: Array<Comment>;
   content: string;
   id: number;
@@ -6,6 +6,4 @@ type Comment = {
   time: number;
   time_ago: number;
   user: string;
-};
-
-export default Comment;
+}

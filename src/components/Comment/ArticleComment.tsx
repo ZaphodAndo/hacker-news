@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Comment from "../../models/Comment";
+import type Comment from "../../models/Comment";
 import "./ArticleComment.scss";
 
 type ArticleCommentProps = {

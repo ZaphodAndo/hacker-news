@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Post from "../../models/Post";
+import type Post from "../../models/Post";
 import Link from "../Link/Link";
 import "./SideBar.scss";
 

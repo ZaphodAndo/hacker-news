@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Post from "../../models/Post";
+import type Post from "../../models/Post";
 import "./Link.scss";
 
 type LinkProps = {
@@ -8,7 +8,7 @@ type LinkProps = {
 };
 
 class Link extends Component<LinkProps> {
-  private _linkRef: React.RefObject<HTMLDivElement>;
+  private _linkRef: React.RefObject<HTMLDivElement | null>;
 
   constructor(props: LinkProps) {
     super(props);

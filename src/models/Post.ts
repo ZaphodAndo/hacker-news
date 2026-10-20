@@ -1,4 +1,4 @@
-type Post = {
+export default interface Post {
   comments_count: number;
   domain: string;
   id: number;
@@ -9,6 +9,4 @@ type Post = {
   type: string;
   url: string;
   user: string;
-};
-
-export default Post;
+}
