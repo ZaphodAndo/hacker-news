@@ -1,67 +1,59 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { ArticleView } from "../ArticleView/ArticleView";
 import { SideBar } from "../Sidebar/SideBar";
 import { NavBar } from "../NavBar/NavBar";
-import { getComments, getTopStories } from "../../services/RequestService";
+import { getComments, getTopStories } from "../../api/hackerNews";
 import type { Post } from "../../models/Post";
 import type { Comment } from "../../models/Comment";
 import "./App.css";
 
-type AppState = {
-    topPosts: Array<Post>;
-    currentPost: Post | null;
-    comments: Array<Comment>;
-};
+export function App() {
+    const [topPosts, setTopPosts] = useState<Array<Post>>([]);
+    const [currentPost, setCurrentPost] = useState<Post | null>(null);
+    const [comments, setComments] = useState<Array<Comment>>([]);
 
-export class App extends Component {
-    public state: AppState = {
-        topPosts: [],
-        currentPost: null,
-        comments: [],
-    };
+    useEffect(() => {
+        getTopStories().then(setTopPosts);
+    }, []);
 
-    public async componentDidMount() {
-        this.checkTheme();
-        const result = await getTopStories();
-        this.setState({ topPosts: result });
-    }
-
-    public checkTheme = () => {
-        let theme = localStorage.getItem("theme");
-        if (!theme) {
-            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light";
-            localStorage.setItem("theme", theme);
+    useEffect(() => {
+        if (currentPost === null || currentPost.comments_count < 1) {
+            return;
         }
-        document.documentElement.setAttribute("data-theme", theme);
-    };
 
-    public selectStory = async (post: Post) => {
-        this.setState({ currentPost: post });
-        if (post.comments_count >= 1) {
-            const comments = await getComments(post.id);
-            this.setState({ comments: comments });
-        } else {
-            this.setState({ comments: [] });
+        // Drop the response if another story is selected before it arrives
+        let ignore = false;
+        getComments(currentPost.id).then((comments) => {
+            if (!ignore) {
+                setComments(comments);
+            }
+        });
+
+        return () => {
+            ignore = true;
+        };
+
+    }, [currentPost]);
+
+    const selectStory = (post: Post) => {
+        if (post.id === currentPost?.id) {
+            return;
         }
+        setCurrentPost(post);
+        setComments([]);
     };
 
-    public render() {
-        return (
-            <div className="App">
-                <NavBar />
-                <div className="content">
-                    <SideBar
-                        posts={this.state.topPosts}
-                        onClick={this.selectStory}
-                    />
-                    <ArticleView
-                        post={this.state.currentPost}
-                        comments={this.state.comments}
-                    />
-                </div>
+    return (
+        <div className="App">
+            <NavBar />
+            <div className="content">
+                <SideBar
+                    posts={topPosts}
+                    activePostId={currentPost?.id}
+                    onClick={selectStory}
+                />
+                <ArticleView post={currentPost} comments={comments} />
             </div>
-        );
-    }
+        </div>
+    );
 }

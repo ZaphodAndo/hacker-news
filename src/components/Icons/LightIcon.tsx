@@ -1,9 +1,8 @@
 type LightIconProps = {
     className?: string;
-    onClick: () => void;
 };
 
-export function LightIcon({ className, onClick }: LightIconProps) {
+export function LightIcon({ className }: LightIconProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +10,7 @@ export function LightIcon({ className, onClick }: LightIconProps) {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            onClick={onClick}
+            aria-hidden="true"
         >
             <path
                 strokeLinecap="round"

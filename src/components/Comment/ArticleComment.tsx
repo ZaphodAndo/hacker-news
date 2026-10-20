@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { sanitiseHtml } from "../../utils/sanitiseHtml";
 import type { Comment } from "../../models/Comment";
 import "./ArticleComment.css";
 
@@ -7,42 +7,33 @@ type ArticleCommentProps = {
     className?: string;
 };
 
-export class ArticleComment extends Component<ArticleCommentProps> {
-    public createMarkup = () => {
-        return { __html: this.props.comment.content };
-    };
+export function ArticleComment({ comment, className }: ArticleCommentProps) {
+    const borderStyle = "level-" + comment.level + " comment-data";
 
-    public render() {
-        const style = this.props.className
-            ? this.props.className + " comment"
-            : "comment";
-
-        const borderStyle =
-            "level-" + this.props.comment.level + " comment-data";
-
-        return (
-            <div className={style}>
-                <div className={borderStyle}>
-                    <p className="comment-meta">
-                        {this.props.comment.user} {this.props.comment.time_ago}
-                    </p>
-                    <div
-                        className="comment-content"
-                        dangerouslySetInnerHTML={this.createMarkup()}
-                    />
-                </div>
-                <div className="comments">
-                    {this.props.comment.comments.map((comment) => {
-                        return (
-                            <ArticleComment
-                                key={comment.id}
-                                comment={comment}
-                                className="child-comment"
-                            ></ArticleComment>
-                        );
-                    })}
-                </div>
+    return (
+        <div className={className ? className + " comment" : "comment"}>
+            <div className={borderStyle}>
+                <p className="comment-meta">
+                    {comment.user} {comment.time_ago}
+                </p>
+                <div
+                    className="comment-content"
+                    dangerouslySetInnerHTML={{
+                        __html: sanitiseHtml(comment.content),
+                    }}
+                />
             </div>
-        );
-    }
+            <div className="comments">
+                {comment.comments.map((child) => {
+                    return (
+                        <ArticleComment
+                            key={child.id}
+                            comment={child}
+                            className="child-comment"
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    );
 }

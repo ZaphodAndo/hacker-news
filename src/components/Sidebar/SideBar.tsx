@@ -1,29 +1,28 @@
-import { Component } from "react";
-import type { Post } from "../../models/Post";
 import { Link } from "../Link/Link";
+import type { Post } from "../../models/Post";
 import "./SideBar.css";
 
 type SideBarProps = {
     posts: Array<Post>;
+    activePostId?: number;
     onClick: (post: Post) => void;
 };
 
-export class SideBar extends Component<SideBarProps> {
-    public render() {
-        return (
-            <div className="side-bar">
-                <div className="side-bar-links">
-                    {this.props.posts.map((post) => {
-                        return (
-                            <Link
-                                key={post.id}
-                                post={post}
-                                onClick={this.props.onClick}
-                            />
-                        );
-                    })}
-                </div>
-            </div>
-        );
-    }
+export function SideBar({ posts, activePostId, onClick }: SideBarProps) {
+    return (
+        <nav className="side-bar" aria-label="Top stories">
+            <ul className="side-bar-links">
+                {posts.map((post) => {
+                    return (
+                        <Link
+                            key={post.id}
+                            post={post}
+                            isActive={post.id === activePostId}
+                            onClick={onClick}
+                        />
+                    );
+                })}
+            </ul>
+        </nav>
+    );
 }

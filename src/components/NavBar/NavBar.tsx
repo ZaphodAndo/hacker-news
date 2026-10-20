@@ -3,9 +3,9 @@ import "./NavBar.css";
 
 export function NavBar() {
     return (
-        <div className="nav-bar">
-            <p>Hacker News</p>
+        <header className="nav-bar">
+            <h1>Hacker News</h1>
             <ThemeToggle />
-        </div>
+        </header>
     );
 }
