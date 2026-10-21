@@ -12,7 +12,7 @@ export function ArticleComment({ comment, className }: ArticleCommentProps) {
     const borderStyle = "level-" + comment.level + " comment-data";
 
     return (
-        <div className={className ? className + " comment" : "comment"}>
+        <li className={className ? className + " comment" : "comment"}>
             <div className={borderStyle}>
                 <p className="comment-meta">
                     {comment.user} <Timestamp time={comment.time} />
@@ -24,17 +24,19 @@ export function ArticleComment({ comment, className }: ArticleCommentProps) {
                     }}
                 />
             </div>
-            <div className="comments">
-                {comment.comments.map((child) => {
-                    return (
-                        <ArticleComment
-                            key={child.id}
-                            comment={child}
-                            className="child-comment"
-                        />
-                    );
-                })}
-            </div>
-        </div>
+            {comment.comments.length > 0 && (
+                <ul className="comments">
+                    {comment.comments.map((child) => {
+                        return (
+                            <ArticleComment
+                                key={child.id}
+                                comment={child}
+                                className="child-comment"
+                            />
+                        );
+                    })}
+                </ul>
+            )}
+        </li>
     );
 }

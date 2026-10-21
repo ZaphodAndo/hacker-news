@@ -14,7 +14,7 @@
             padding: 0;
             border: none;
             background: none;
-            color: var(--accent);
+            color: var(--link);
             font: inherit;
             font-weight: 600;
             cursor: pointer;
@@ -32,18 +32,20 @@
             margin: 0 0 0.625rem 0;
         }
 
-        p,
-        .post-link {
+        p {
             color: var(--secondary-text);
             font-size: 1rem;
             font-weight: 600;
             line-height: 1.75rem;
             margin: unset;
-            text-decoration: unset;
         }
 
-        .post-link:hover {
-            color: var(--accent);
+        .post-link {
+            color: inherit;
+
+            &:hover {
+                color: var(--link);
+            }
         }
     }
 
@@ -57,6 +59,17 @@
     .comment-section {
         max-width: 44rem;
         margin: 2.5rem auto 9.375rem auto;
+
+        .comment-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .comments-message {
+            margin: 0;
+            color: var(--secondary-text);
+        }
     }
 }
 

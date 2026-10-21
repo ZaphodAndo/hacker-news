@@ -7,9 +7,9 @@
     h1 {
         font-weight: 700;
         font-size: 1.5rem;
-        line-height: 1.25rem;
+        line-height: 2rem;
         color: var(--primary-text);
-        padding: 1.125rem 0 1.125rem 7.9375rem;
+        padding: 0.75rem 0 0.75rem 7.9375rem;
         margin: unset;
     }
 }

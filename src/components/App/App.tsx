@@ -15,13 +15,19 @@ if (history.state?.storyOpen) {
 }
 
 export function App() {
-    const [topPosts, setTopPosts] = useState<Array<Post>>([]);
+    const [topPosts, setTopPosts] = useState<Array<Post> | null>(null);
     const [currentPost, setCurrentPost] = useState<Post | null>(null);
-    const [comments, setComments] = useState<Array<Comment>>([]);
+    const [comments, setComments] = useState<Array<Comment> | null>(null);
 
     useEffect(() => {
         getTopStories().then(setTopPosts);
     }, []);
+
+    useEffect(() => {
+        document.title = currentPost
+            ? `${currentPost.title} | Hacker News`
+            : "Hacker News";
+    }, [currentPost]);
 
     useEffect(() => {
         if (currentPost === null || currentPost.comments_count < 1) {
@@ -48,7 +54,7 @@ export function App() {
 
         flushSync(() => {
             setCurrentPost(post);
-            setComments([]);
+            setComments(post.comments_count > 0 ? null : []);
         });
 
         const listHidden = !document
@@ -83,10 +89,34 @@ export function App() {
         }
     };
 
+    // Read out by screen readers whenever it changes
+    let status = "";
+    if (topPosts === null) {
+        status = "Loading stories…";
+    } else if (currentPost !== null && comments === null) {
+        status = "Loading comments…";
+    } else if (currentPost !== null) {
+        status = comments?.length ? "Comments loaded" : "No comments yet";
+    }
+
     return (
         <div className="App">
+            {currentPost && (
+                <button
+                    type="button"
+                    className="skip-link"
+                    onClick={() =>
+                        document.getElementById("article-title")?.focus()
+                    }
+                >
+                    Skip to article
+                </button>
+            )}
+            <p role="status" className="visually-hidden">
+                {status}
+            </p>
             <NavBar />
-            <div className={currentPost ? "content article-open" : "content"}>
+            <main className={currentPost ? "content article-open" : "content"}>
                 <SideBar
                     posts={topPosts}
                     activePostId={currentPost?.id}
@@ -97,7 +127,7 @@ export function App() {
                     comments={comments}
                     onBack={goBack}
                 />
-            </div>
+            </main>
         </div>
     );
 }
