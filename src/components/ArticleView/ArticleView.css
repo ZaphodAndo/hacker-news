@@ -64,6 +64,10 @@
             margin: 0;
             padding: 0;
             list-style: none;
+
+            > li {
+                scroll-margin-top: 1rem;
+            }
         }
 
         .comments-message {
@@ -87,6 +91,12 @@
                 display: block;
             }
         }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .article-view {
+        scroll-behavior: smooth;
     }
 }
 

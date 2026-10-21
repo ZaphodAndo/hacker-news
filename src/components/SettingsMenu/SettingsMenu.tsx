@@ -3,7 +3,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { DarkIcon } from "../Icons/DarkIcon";
 import { HelpIcon } from "../Icons/HelpIcon";
 import { LightIcon } from "../Icons/LightIcon";
-import { SettingsIcon } from "../Icons/SettingsIcon";
+import { MenuIcon } from "../Icons/MenuIcon";
 import { isMac } from "../../utils/platform";
 import "./SettingsMenu.css";
 
@@ -31,7 +31,7 @@ export function SettingsMenu({ onShowShortcuts }: SettingsMenuProps) {
                 aria-label="Settings"
                 popoverTarget="settings-menu"
             >
-                <SettingsIcon className="icon" />
+                <MenuIcon className="icon" />
             </button>
             <div
                 ref={menuRef}

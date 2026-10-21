@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { ArticleView } from "../ArticleView/ArticleView";
 import { SideBar } from "../Sidebar/SideBar";
@@ -8,6 +8,7 @@ import { getComments, getTopStories } from "../../api/hackerNews";
 import { useKeyboardShortcuts } from "../../hooks/useKeyboardShortcuts";
 import type { Post } from "../../models/Post";
 import type { Comment } from "../../models/Comment";
+import type { ArticleViewHandle } from "../ArticleView/ArticleViewHandle";
 import "./App.css";
 
 // No story is open on a fresh page load, so if the page was reloaded while one
@@ -20,6 +21,7 @@ export function App() {
     const [topPosts, setTopPosts] = useState<Array<Post> | null>(null);
     const [currentPost, setCurrentPost] = useState<Post | null>(null);
     const [comments, setComments] = useState<Array<Comment> | null>(null);
+    const articleViewRef = useRef<ArticleViewHandle>(null);
 
     useEffect(() => {
         getTopStories().then(setTopPosts);
@@ -118,6 +120,7 @@ export function App() {
         j: () => selectNearbyStory(1),
         k: () => selectNearbyStory(-1),
         a: focusArticle,
+        n: () => articleViewRef.current?.scrollToNextThread(),
         escape: () => currentPost && goBack(),
     });
 
@@ -161,6 +164,7 @@ export function App() {
                     onClick={selectStory}
                 />
                 <ArticleView
+                    ref={articleViewRef}
                     post={currentPost}
                     comments={comments}
                     onBack={goBack}

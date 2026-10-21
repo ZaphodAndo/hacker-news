@@ -11,6 +11,11 @@ DOMPurify.addHook("afterSanitizeAttributes", (node) => {
         node.setAttribute("target", "_blank");
         node.setAttribute("rel", "noopener noreferrer");
     }
+
+    // Code blocks scroll sideways, so keyboard users need to be able to focus them
+    if (node.tagName === "PRE") {
+        node.setAttribute("tabindex", "0");
+    }
 });
 
 export function sanitiseHtml(html: string) {

@@ -1,22 +1,37 @@
+import { useImperativeHandle, type Ref } from "react";
 import { ArticleComment } from "../Comment/ArticleComment";
+import { NextThreadButton } from "../NextThreadButton/NextThreadButton";
 import { NoArticleView } from "../NoArticleView/NoArticleView";
+import { useNextThread } from "../../hooks/useNextThread";
 import type { Post } from "../../models/Post";
 import type { Comment } from "../../models/Comment";
+import type { ArticleViewHandle } from "./ArticleViewHandle";
 import "./ArticleView.css";
 
 type ArticleViewProps = {
+    ref?: Ref<ArticleViewHandle>;
     post: Post | null;
     comments: Array<Comment> | null;
     onBack: () => void;
 };
 
-export function ArticleView({ post, comments, onBack }: ArticleViewProps) {
+export function ArticleView({ ref, post, comments, onBack }: ArticleViewProps) {
+    const { articleRef, commentListRef, scrollToNextThread, onScrollEnd } =
+        useNextThread();
+
+    useImperativeHandle(ref, () => ({ scrollToNextThread }));
+
     if (post === null) {
         return <NoArticleView />;
     }
 
     return (
-        <article className="article-view" aria-labelledby="article-title">
+        <article
+            ref={articleRef}
+            className="article-view"
+            aria-labelledby="article-title"
+            onScrollEnd={onScrollEnd}
+        >
             <div className="article-info">
                 <button type="button" className="back-button" onClick={onBack}>
                     <span aria-hidden="true">←</span> Back to stories
@@ -51,7 +66,7 @@ export function ArticleView({ post, comments, onBack }: ArticleViewProps) {
                 ) : comments.length === 0 ? (
                     <p className="comments-message">No comments yet.</p>
                 ) : (
-                    <ul className="comment-list">
+                    <ul ref={commentListRef} className="comment-list">
                         {comments.map((comment) => {
                             return (
                                 <ArticleComment
@@ -63,6 +78,9 @@ export function ArticleView({ post, comments, onBack }: ArticleViewProps) {
                     </ul>
                 )}
             </div>
+            {!!comments?.length && (
+                <NextThreadButton onClick={scrollToNextThread} />
+            )}
         </article>
     );
 }

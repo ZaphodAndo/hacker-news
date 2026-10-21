@@ -13,6 +13,7 @@ const shortcuts = [
     { key: "J", action: "Open the next story" },
     { key: "K", action: "Open the previous story" },
     { key: "A", action: "Jump to the open article" },
+    { key: "N", action: "Scroll to the next comment thread" },
     { key: "Esc", action: "Close the story" },
     { key: `${isMac ? "⌘" : "Ctrl"} + /`, action: "Show or hide this help" },
 ];

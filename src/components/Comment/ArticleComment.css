@@ -15,6 +15,11 @@
 
         .comment-content {
             color: var(--article-text);
+            overflow-wrap: anywhere;
+
+            pre {
+                overflow-x: auto;
+            }
 
             p {
                 margin-top: 0.25rem;
