@@ -1,7 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { DarkIcon } from "../Icons/DarkIcon";
 import { LightIcon } from "../Icons/LightIcon";
-import "./ThemeToggle.css";
 
 type Theme = "light" | "dark";
 
@@ -30,7 +29,7 @@ export function ThemeToggle() {
     return (
         <button
             type="button"
-            className="theme-toggle"
+            className="icon-button"
             aria-label={`Switch to ${nextTheme} theme`}
             onClick={() => setTheme(nextTheme)}
         >

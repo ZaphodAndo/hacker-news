@@ -1,0 +1,88 @@
+.shortcuts-help {
+    box-sizing: border-box;
+    width: min(22rem, calc(100% - 2.25rem));
+    padding: 1.5rem;
+    border: 0.0625rem solid var(--teriary-background);
+    border-radius: 0.4375rem;
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+
+    &::backdrop {
+        background-color: hsla(0, 0%, 0%, 0.5);
+    }
+
+    h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.25rem;
+    }
+
+    .shortcuts-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+
+        input {
+            width: 1.125rem;
+            height: 1.125rem;
+            margin: 0;
+            accent-color: var(--accent);
+        }
+    }
+
+    dl {
+        margin: 1.25rem 0;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-top: 0.0625rem solid var(--teriary-background);
+        }
+
+        dt {
+            min-width: 3rem;
+        }
+
+        dd {
+            margin: 0;
+            color: var(--secondary-text);
+        }
+    }
+
+    kbd {
+        display: inline-block;
+        min-width: 1.5rem;
+        padding: 0.125rem 0.375rem;
+        border: 0.0625rem solid var(--secondary-text);
+        border-radius: 0.25rem;
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0;
+    }
+
+    .close-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.4375rem;
+        background-color: var(--accent);
+        color: var(--primary-text-selected);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:focus-visible {
+            outline: 0.125rem solid var(--link);
+            outline-offset: 0.125rem;
+        }
+    }
+}

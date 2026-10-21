@@ -3,7 +3,9 @@ import { flushSync } from "react-dom";
 import { ArticleView } from "../ArticleView/ArticleView";
 import { SideBar } from "../Sidebar/SideBar";
 import { NavBar } from "../NavBar/NavBar";
+import { ShortcutsHelp } from "../ShortcutsHelp/ShortcutsHelp";
 import { getComments, getTopStories } from "../../api/hackerNews";
+import { useKeyboardShortcuts } from "../../hooks/useKeyboardShortcuts";
 import type { Post } from "../../models/Post";
 import type { Comment } from "../../models/Comment";
 import "./App.css";
@@ -62,8 +64,31 @@ export function App() {
             ?.checkVisibility();
 
         if (listHidden) {
-            history.pushState({ storyOpen: true }, "");
-            document.getElementById("article-title")?.focus();
+            if (!history.state?.storyOpen) {
+                history.pushState({ storyOpen: true }, "");
+            }
+            focusArticle();
+        }
+    };
+
+    const focusArticle = () => {
+        document.getElementById("article-title")?.focus();
+    };
+
+    const selectNearbyStory = (offset: number) => {
+        if (!topPosts?.length) {
+            return;
+        }
+
+        const index = topPosts.findIndex((post) => post.id === currentPost?.id);
+        const next = Math.min(Math.max(index + offset, 0), topPosts.length - 1);
+        selectStory(topPosts[next]);
+
+        const storyButton = document.getElementById(
+            `story-${topPosts[next].id}`,
+        );
+        if (storyButton?.checkVisibility()) {
+            storyButton.focus();
         }
     };
 
@@ -88,6 +113,13 @@ export function App() {
             closeStory();
         }
     };
+
+    const shortcuts = useKeyboardShortcuts({
+        j: () => selectNearbyStory(1),
+        k: () => selectNearbyStory(-1),
+        a: focusArticle,
+        escape: () => currentPost && goBack(),
+    });
 
     // Read out by screen readers whenever it changes
     let status = "";
@@ -115,7 +147,13 @@ export function App() {
             <p role="status" className="visually-hidden">
                 {status}
             </p>
-            <NavBar />
+            <NavBar onShowShortcuts={() => shortcuts.setHelpOpen(true)} />
+            <ShortcutsHelp
+                open={shortcuts.helpOpen}
+                onClose={() => shortcuts.setHelpOpen(false)}
+                enabled={shortcuts.enabled}
+                onEnabledChange={shortcuts.setEnabled}
+            />
             <main className={currentPost ? "content article-open" : "content"}>
                 <SideBar
                     posts={topPosts}

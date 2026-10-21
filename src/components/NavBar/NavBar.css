@@ -12,6 +12,12 @@
         padding: 0.75rem 0 0.75rem 7.9375rem;
         margin: unset;
     }
+
+    .nav-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-left: auto;
+    }
 }
 
 @media (max-width: 48rem) {

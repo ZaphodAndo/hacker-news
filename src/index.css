@@ -48,3 +48,23 @@ body {
         border: 0;
     }
 }
+
+.icon-button {
+    display: flex;
+    padding: 0;
+    border: none;
+    border-radius: 0.4375rem;
+    background: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: 0.125rem solid var(--link);
+        outline-offset: 0.125rem;
+    }
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+}
