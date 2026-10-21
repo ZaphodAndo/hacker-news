@@ -1,0 +1,75 @@
+.comment {
+    margin-bottom: 1.25rem;
+
+    .comment-data {
+        padding-left: 0.625rem;
+        border-left: solid 0.125rem hsla(45, 86%, 62%, 1);
+
+        .comment-meta {
+            color: var(--article-header-text);
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-content {
+            color: var(--article-text);
+            overflow-wrap: anywhere;
+
+            pre {
+                overflow-x: auto;
+            }
+
+            p {
+                margin-top: 0.25rem;
+                color: var(--article-text);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.25rem;
+            }
+
+            a {
+                color: var(--link);
+
+                &:hover {
+                    text-decoration-thickness: 0.125rem;
+                }
+            }
+        }
+    }
+
+    .level-0 {
+        border-left: solid 0.125rem hsla(209, 100%, 36%, 1);
+    }
+
+    .level-1 {
+        border-left: solid 0.125rem hsla(0, 79%, 63%, 1);
+    }
+
+    .level-2 {
+        border-left: solid 0.125rem hsla(145, 50%, 62%, 1);
+    }
+
+    .level-3 {
+        border-left: solid 0.125rem hsla(271, 70%, 60%, 1);
+    }
+
+    .level-4 {
+        border-left: solid 0.125rem hsla(195, 86%, 64%, 1);
+    }
+
+    .level-5 {
+        border-left: solid 0.125rem hsla(28, 87%, 62%, 1);
+    }
+
+    .comments {
+        margin: 0.625rem 0 0 0;
+        padding: 0;
+        list-style: none;
+
+        .child-comment {
+            margin-left: 0.625rem;
+        }
+    }
+}

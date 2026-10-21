@@ -1,13 +1,17 @@
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import "./NavBar.scss";
+import { SettingsMenu } from "../SettingsMenu/SettingsMenu";
+import "./NavBar.css";
 
-function NavBar() {
-  return (
-    <div className="nav-bar">
-      <p>Hacker News</p>
-      <ThemeToggle />
-    </div>
-  );
+type NavBarProps = {
+    onShowShortcuts: () => void;
+};
+
+export function NavBar({ onShowShortcuts }: NavBarProps) {
+    return (
+        <header className="nav-bar">
+            <h1>Hacker News</h1>
+            <div className="nav-actions">
+                <SettingsMenu onShowShortcuts={onShowShortcuts} />
+            </div>
+        </header>
+    );
 }
-
-export default NavBar;

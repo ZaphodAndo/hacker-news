@@ -1,0 +1,125 @@
+.article-view {
+    background-color: var(--primary-background);
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .article-info {
+        max-width: 44rem;
+        margin: 2.5rem auto 2.5rem auto;
+
+        .back-button {
+            display: none;
+            margin: 0 0 1rem 0;
+            padding: 0;
+            border: none;
+            background: none;
+            color: var(--link);
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        h2:focus {
+            outline: none;
+        }
+
+        h2 {
+            color: var(--primary-text);
+            font-size: 1.75rem;
+            font-weight: bold;
+            line-height: 2.25rem;
+            margin: 0 0 0.625rem 0;
+        }
+
+        p {
+            color: var(--secondary-text);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.75rem;
+            margin: unset;
+        }
+
+        .post-link {
+            color: inherit;
+
+            &:hover {
+                color: var(--link);
+            }
+        }
+    }
+
+    hr {
+        margin: 0;
+        border: none;
+        height: 0.0625rem;
+        background-color: var(--teriary-background);
+    }
+
+    .comment-section {
+        max-width: 44rem;
+        margin: 2.5rem auto 9.375rem auto;
+
+        .comment-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            > li {
+                scroll-margin-top: 1rem;
+            }
+        }
+
+        .comments-message {
+            margin: 0;
+            color: var(--secondary-text);
+        }
+    }
+}
+
+@media (max-width: 48rem) {
+    .article-view {
+        .article-info,
+        .comment-section {
+            padding: 0 1.125rem;
+        }
+
+        .article-info {
+            margin-top: 1.5rem;
+
+            .back-button {
+                display: block;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .article-view {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Scrollbar styling */
+.article-view {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumb-background) var(--primary-background);
+}
+
+.article-view::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+.article-view::-webkit-scrollbar-track {
+    background: var(--primary-background);
+}
+
+.article-view::-webkit-scrollbar-thumb {
+    background-color: var(--thumb-background);
+    border-radius: 0.4375rem;
+    border: 0.1875rem solid var(--primary-background);
+}
+
+.article-view::-webkit-scrollbar-thumb:hover {
+    background-color: var(--thumb-background-hover);
+}

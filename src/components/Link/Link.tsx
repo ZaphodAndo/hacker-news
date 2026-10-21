@@ -1,46 +1,29 @@
-import React, { Component } from "react";
-import Post from "../../models/Post";
-import "./Link.scss";
+import { Timestamp } from "../Timestamp/Timestamp";
+import type { Post } from "../../models/Post";
+import "./Link.css";
 
 type LinkProps = {
-  post: Post;
-  onClick: (story: Post) => void;
+    post: Post;
+    isActive: boolean;
+    onClick: (story: Post) => void;
 };
 
-class Link extends Component<LinkProps> {
-  private _linkRef: React.RefObject<HTMLDivElement>;
-
-  constructor(props: LinkProps) {
-    super(props);
-    this._linkRef = React.createRef();
-  }
-
-  public viewPost = () => {
-    if (this._linkRef.current?.className !== "link active") {
-      const element = document.getElementsByClassName("active");
-
-      if (element[0] !== undefined) {
-        element[0].classList.remove("active");
-      }
-
-      if (this._linkRef.current?.className) {
-        this._linkRef.current.className = "link active";
-      }
-    }
-
-    this.props.onClick(this.props.post);
-  };
-
-  public render() {
+export function Link({ post, isActive, onClick }: LinkProps) {
     return (
-      <div className="link" onClick={this.viewPost} ref={this._linkRef}>
-        <h1>{this.props.post.title}</h1>
-        <p>
-          Posted by {this.props.post.user} {this.props.post.time_ago}
-        </p>
-      </div>
+        <li className={isActive ? "link active" : "link"}>
+            <h2>
+                <button
+                    type="button"
+                    id={`story-${post.id}`}
+                    aria-current={isActive ? "true" : undefined}
+                    onClick={() => onClick(post)}
+                >
+                    {post.title}
+                </button>
+            </h2>
+            <p>
+                Posted by {post.user} <Timestamp time={post.time} />
+            </p>
+        </li>
     );
-  }
 }
-
-export default Link;
