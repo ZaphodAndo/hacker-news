@@ -1,6 +1,4 @@
 import { useLayoutEffect, useState } from "react";
-import { DarkIcon } from "../Icons/DarkIcon";
-import { LightIcon } from "../Icons/LightIcon";
 
 type Theme = "light" | "dark";
 
@@ -16,7 +14,7 @@ const getInitialTheme = (): Theme => {
         : "light";
 };
 
-export function ThemeToggle() {
+export function useTheme() {
     const [theme, setTheme] = useState(getInitialTheme);
 
     useLayoutEffect(() => {
@@ -24,20 +22,7 @@ export function ThemeToggle() {
         localStorage.setItem("theme", theme);
     }, [theme]);
 
-    const nextTheme = theme === "light" ? "dark" : "light";
+    const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
-    return (
-        <button
-            type="button"
-            className="icon-button"
-            aria-label={`Switch to ${nextTheme} theme`}
-            onClick={() => setTheme(nextTheme)}
-        >
-            {theme === "light" ? (
-                <DarkIcon className="icon" />
-            ) : (
-                <LightIcon className="icon" />
-            )}
-        </button>
-    );
+    return { theme, toggleTheme };
 }

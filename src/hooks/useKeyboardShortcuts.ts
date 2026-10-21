@@ -23,6 +23,7 @@ export function useKeyboardShortcuts(shortcuts: Shortcuts) {
         if (
             !enabled ||
             helpOpen ||
+            document.querySelector(":popover-open") ||
             event.ctrlKey ||
             event.altKey ||
             event.metaKey

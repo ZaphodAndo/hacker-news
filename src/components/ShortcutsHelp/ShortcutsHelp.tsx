@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { isMac } from "../../utils/platform";
 import "./ShortcutsHelp.css";
 
 type ShortcutsHelpProps = {
@@ -7,8 +8,6 @@ type ShortcutsHelpProps = {
     enabled: boolean;
     onEnabledChange: (enabled: boolean) => void;
 };
-
-const isMac = /Mac|iPhone|iPad/.test(navigator.userAgent);
 
 const shortcuts = [
     { key: "J", action: "Open the next story" },

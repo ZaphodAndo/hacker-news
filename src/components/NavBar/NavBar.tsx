@@ -1,5 +1,4 @@
-import { HelpIcon } from "../Icons/HelpIcon";
-import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import { SettingsMenu } from "../SettingsMenu/SettingsMenu";
 import "./NavBar.css";
 
 type NavBarProps = {
@@ -11,16 +10,7 @@ export function NavBar({ onShowShortcuts }: NavBarProps) {
         <header className="nav-bar">
             <h1>Hacker News</h1>
             <div className="nav-actions">
-                <button
-                    type="button"
-                    className="icon-button"
-                    aria-label="Keyboard shortcuts"
-                    aria-keyshortcuts="Control+/ Meta+/"
-                    onClick={onShowShortcuts}
-                >
-                    <HelpIcon className="icon" />
-                </button>
-                <ThemeToggle />
+                <SettingsMenu onShowShortcuts={onShowShortcuts} />
             </div>
         </header>
     );
